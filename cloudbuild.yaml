@@ -10,8 +10,8 @@ steps:
   - name: 'docker'
     args: ['run','-d','--name', 'clientbackend', 'gcr.io/clientbackend-297422/clientbackend/clientbackend']
 
-  - name: 'docker'
-    args: ['exec', 'clientbackend', 'npm', 'run', 'test']
+#  - name: 'docker'
+ #   args: ['exec', 'clientbackend', 'npm', 'run', 'test']
 
   - name: 'docker'
     args: ['push', 'gcr.io/clientbackend-297422/clientbackend/clientbackend']
