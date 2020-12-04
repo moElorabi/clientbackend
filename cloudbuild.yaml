@@ -1,0 +1,28 @@
+steps: 
+  # - name: gcr.io/cloud-builders/docker
+  #   entrypoint: 'bash'
+  #   args: [ '-c', 'docker login --username=dockerLogin --password=$$PASSWORD']
+  #   secretEnv: ["PASSWORD"]
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/clientbackend-297422/clientbackend/clientbackend', '-t', 'gcr.io/clientbackend-297422/clientbackend/clientbackend:$SHORT_SHA', '.']
+
+  - name: 'docker'
+    args: ['run','-d','--name', 'clientbackend', 'gcr.io/clientbackend-297422/clientbackend/clientbackend']
+
+  - name: 'docker'
+    args: ['exec', 'clientbackend', 'npm', 'run', 'test']
+
+  - name: 'docker'
+    args: ['push', 'gcr.io/clientbackend-297422/clientbackend/clientbackend']
+
+  - name: 'docker'
+    args: ['push', 'gcr.io/clientbackend-297422/clientbackend/clientbackend:$SHORT_SHA']
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: ['run', 'deploy', 'clientbackend', '--image', 'gcr.io/clientbackend-297422/clientbackend/clientbackend:$SHORT_SHA', '--platform', 'managed', '--allow-unauthenticated']
+
+# secrets:
+#   - kmsKeyName: projects/projetoagenda/locations/global/keyRings/teste-cd/cryptoKeys/key-name
+#     secretEnv:
+#       PASSWORD: base64Password
