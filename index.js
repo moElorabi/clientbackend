@@ -26,6 +26,7 @@ mongoose.connect(
     console.log("MONGODB IS HERE");
   }
 );
+
 // set up routes
 
 app.use("/categories", require("./routes/categoryRouter"));
