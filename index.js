@@ -9,8 +9,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const PORT = 4000;
-
 // set up mongoose
 
 mongoose.connect(
@@ -31,4 +29,6 @@ mongoose.connect(
 
 app.use("/categories", require("./routes/categoryRouter"));
 
-app.listen(PORT, () => console.log(`The server has started on port ${PORT}`));
+app.listen(process.env.PORT, () =>
+  console.log(`The server has started on port ${process.env.PORT}`)
+);
