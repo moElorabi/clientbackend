@@ -20,7 +20,7 @@ steps:
     args: ['push', 'gcr.io/clientbackend-297422/clientbackend/clientbackend:$SHORT_SHA']
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: ['run', 'deploy', 'clientbackend', '--image', 'gcr.io/clientbackend-297422/clientbackend/clientbackend:$SHORT_SHA', '--platform', 'managed', '--allow-unauthenticated']
+    args: ['run', 'deploy', 'clientbackend', '--image', 'gcr.io/clientbackend-297422/clientbackend/clientbackend:$SHORT_SHA', '--region', 'us-central1', '--platform', 'managed', '--allow-unauthenticated']
 
 # secrets:
 #   - kmsKeyName: projects/projetoagenda/locations/global/keyRings/teste-cd/cryptoKeys/key-name
